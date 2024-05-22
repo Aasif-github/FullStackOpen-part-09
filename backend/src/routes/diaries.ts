@@ -12,6 +12,6 @@ router.post('/', (_req, res) => {
 });
 
 
-router.get('/m',  diaryService.addDiary);
+
 
 export default router;

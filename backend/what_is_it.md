@@ -2,7 +2,7 @@ to start project - backend
 > npm run dev
 
 to start project - frontend
-> 
+>  npm run dev
 
 
 
