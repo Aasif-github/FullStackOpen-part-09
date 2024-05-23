@@ -1,6 +1,5 @@
 import diaryData from '../../data/diaries';
-
-import { NonSensitiveDiaryEntry, DiaryEntry } from '../types';
+import { NewDiaryEntry, NonSensitiveDiaryEntry, DiaryEntry,Weather, Visibility } from '../types';
 
 // const diaries: DiaryEntry[] = diaryData; 
 /*
@@ -14,17 +13,32 @@ const diaries: DiaryEntry[] = diaryData as DiaryEntry[];
 
 // const diaries: Array<DiaryEntry> = diaryData as Array<DiaryEntry>; // also we can write this way
 
-const getEntries = ():DiaryEntry[] => {
+const getEntries = (): DiaryEntry[] => {
   return diaries;
 };
 
-const addDiary = () => {
-  return null;
+const addDiary = (
+  date:string, 
+  weather:Weather, 
+  visibility:Visibility,
+  comment:string): DiaryEntry => {
+  
+  const newDiaryEntry = {
+
+    id: Math.max(...diaries.map(d => d.id)) + 1,
+    date,
+    weather,
+    visibility,
+    comment
+  };
+
+  diaries.push(newDiaryEntry);
+  return newDiaryEntry;
 };
 
-const getNonSensitiveEntries = ():NonSensitiveDiaryEntry[] => {
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => {
   //console.log(diaries);
-  return diaries.map(({id, date, visibility, weather}) => ({
+  return diaries.map(({ id, date, visibility, weather }) => ({
     id,
     date,
     visibility,
@@ -32,8 +46,15 @@ const getNonSensitiveEntries = ():NonSensitiveDiaryEntry[] => {
   }));
 }
 
+const findById = (id: number): DiaryEntry | undefined => {
+  const entry = diaries.find(d => d.id === id);
+
+  return entry;
+}
+
 export default {
   getEntries,
   addDiary,
-  getNonSensitiveEntries
+  getNonSensitiveEntries,
+  findById
 };
