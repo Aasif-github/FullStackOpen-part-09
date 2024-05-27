@@ -139,3 +139,76 @@ Type assertions in TypeScript are a powerful tool for developers to inform the c
 
 ## Utility Type
 https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys
+
+
+## Mapping Arrays to Object
+
+Certainly! Let's break down this TypeScript code snippet step by step:
+
+```typescript
+const diaryEntries: DiaryEntry[] = data.map(obj => {
+  const object = toNewDiaryEntry(obj) as DiaryEntry;
+  object.id = obj.id;
+  return object;
+});
+```
+
+### What the Code Does
+
+1. **Declaration of `diaryEntries`**:
+   - `const diaryEntries: DiaryEntry[]` declares a constant variable `diaryEntries` that is an array of `DiaryEntry` objects.
+
+2. **Mapping `data` to `diaryEntries`**:
+   - `data.map(obj => { ... })` iterates over each element in the `data` array, transforming each element (`obj`) according to the function provided.
+
+3. **Transforming Each `obj`**:
+   - `const object = toNewDiaryEntry(obj) as DiaryEntry;` calls the function `toNewDiaryEntry` with `obj` as the argument, transforming `obj` into a new diary entry. The `as DiaryEntry` part is a type assertion, indicating that the returned value should be treated as a `DiaryEntry` type.
+
+4. **Setting the `id` Property**:
+   - `object.id = obj.id;` sets the `id` property of the newly created `object` to be the same as the `id` property of the original `obj`. This ensures that the `id` is carried over to the new `DiaryEntry` object.
+
+5. **Returning the Transformed Object**:
+   - `return object;` returns the transformed object, which will be added to the `diaryEntries` array.
+
+### Purpose of the Code
+
+The purpose of this code is to convert an array of objects (`data`) into an array of `DiaryEntry` objects (`diaryEntries`). Each object in the `data` array is processed by `toNewDiaryEntry`, and its `id` property is preserved. The resulting array is a new array of `DiaryEntry` objects, each with the same `id` as the corresponding original object in `data`.
+
+### Assumptions
+
+- `data` is an array of objects that contain at least an `id` property.
+- `toNewDiaryEntry` is a function that takes an object from `data` and transforms it into a new `DiaryEntry`.
+- `DiaryEntry` is a TypeScript type or interface that defines the structure of a diary entry object.
+
+### Example
+
+If `data` looks like this:
+
+```typescript
+const data = [
+  { id: 1, title: "Day 1", content: "Went to the park" },
+  { id: 2, title: "Day 2", content: "Read a book" }
+];
+```
+
+And assuming `toNewDiaryEntry` processes these objects appropriately, after running the code, `diaryEntries` might look like this:
+
+```typescript
+const diaryEntries = [
+  { id: 1, title: "Day 1", content: "Went to the park" },
+  { id: 2, title: "Day 2", content: "Read a book" }
+];
+```
+
+Each object in the `data` array is transformed into a `DiaryEntry`, and their `id` properties are preserved.
+
+```js
+ const weather = {
+     sunny: "sunny-",
+     rainy: "rainy-",
+     cloudy:"cloudy-"
+ }
+ 
+ const result = Object.values(weather).map(v => v.toString()).includes('sunny-');
+ console.log(result); //true
+```

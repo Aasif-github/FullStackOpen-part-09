@@ -21,7 +21,7 @@ const addDiary = (
   date:string, 
   weather:Weather, 
   visibility:Visibility,
-  comment:string): DiaryEntry => {
+  comment:string): NewDiaryEntry => {
   
   const newDiaryEntry = {
 
